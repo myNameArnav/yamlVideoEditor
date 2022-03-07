@@ -1,0 +1,10 @@
+Project:
+  name: ""
+  assets:
+    video:
+    audio:
+    text:
+    image:
+  export:
+    outputName: ""
+    isGIF: False

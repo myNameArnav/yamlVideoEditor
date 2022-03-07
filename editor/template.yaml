@@ -1,0 +1,31 @@
+Project:
+  name: "Sample Project"
+  assets:
+    video: &vid
+        start.mp4: [10, 15]
+        center.mp4:
+        end.mp4: [40, 50]
+    audio: &audio
+      music.mp3:
+        timings: [0, 200]
+    text: &text
+      "Hello and welcome!":
+        duration: [0, 20]
+        font: Helvetica   #? Helvetica, Times New Roman, etc.
+        size: 20    #? Size of Font
+        position: [center, center]    #? [(x)center/left/right, (y)center/top/bottom]
+        opacity: 1    #? In the range of 0-1
+      "See you Soon":
+        duration: [180, 200]
+        font: Times New Roman
+        size: 20 
+        position: [center, center]
+    image: &img
+      logo.png:
+        timings: [0, 200]
+        position: [center, top]
+  export:
+    outputName: "Sample Output Project"
+    resolution: [1920, 1080]
+    extention: mp4    #? .gif, etc
+
