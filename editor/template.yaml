@@ -1,31 +1,25 @@
 Project:
-  name: "Sample Project"
+  name: "Template"
   assets:
-    video: &vid
-        start.mp4: [10, 15]
-        center.mp4:
-        end.mp4: [40, 50]
-    audio: &audio
+    video:
+      meeting.mp4:                                  #* meeting.mp4 -> name of the video file
+        subclip: [3000, 3010]                       #* Part of the clip[Start Time, End Time]
+    audio:
       music.mp3:
-        timings: [0, 200]
-    text: &text
-      "Hello and welcome!":
-        duration: [0, 20]
-        font: Helvetica   #? Helvetica, Times New Roman, etc.
-        size: 20    #? Size of Font
-        position: [center, center]    #? [(x)center/left/right, (y)center/top/bottom]
-        opacity: 1    #? In the range of 0-1
-      "See you Soon":
-        duration: [180, 200]
-        font: Times New Roman
-        size: 20 
-        position: [center, center]
-    image: &img
-      logo.png:
-        timings: [0, 200]
-        position: [center, top]
+        timings: []
+    text: 
+      "Hello and welcome":                          #* "Hello and welcome" -> Text to be shown 
+        timings: [0, 2]                             #* Timing of the text [Start Time, End Time]
+        size: 50                                    #* Size of the font
+        position: [center, center]                  #* Position of the text
+        margin: [0, 50, 50, 0]                      #* Margin or Padding [Top, Right, Bottom, Left] (Clockwise)
+        opacity: 0.6                                #* Opacity of the text
+    image:
+      logo_small.png:                               #* logo_small.png -> name of the image file 
+        timings: [0, 10]                            #* Timing of the text [Start Time, End Time]
+        position: [right, bottom]                   #* Position of the Image on the video (available options [top, bottom, right, left, center])
+        margin: [0, 0, 50, 50]                      #* Margin or Padding [Top, Right, Bottom, Left] (Clockwise)
+        size: 10                                    #* Size of the image
   export:
-    outputName: "Sample Output Project"
-    resolution: [1920, 1080]
-    extention: mp4    #? .gif, etc
-
+    outputName: "output.mp4"                        #* Output name of the file
+    isGIF: False                                    #* Outputs in .gif
