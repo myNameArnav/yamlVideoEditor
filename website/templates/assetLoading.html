@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--! CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <title>Asset Upload</title>
+</head>
+
+<body>
+    <h1>Asset Uploading</h1>
+    <div style="overflow-x: auto;">
+        <table>
+            <th colspan="3">
+                <div class="table-title">Videos
+                    <div> {% for i in vid: %}
+                        <tr>
+                            <td>
+                                {{ i }}
+                            </td>
+                            <td>
+                                <input type="file" name="" id="">
+                            </td>
+                            <td>
+                                <input type="Submit" value="Upload!">
+                            </td>
+                        </tr>
+            </th>
+            {% endfor %}
+        </table>
+        </div>
+        <div style="overflow-x: auto;">
+            <table>
+                <th colspan="3">
+                    <div class="table-title">Images
+                        <div> {% for j in img: %}
+                            <tr>
+                                <td>
+                                    {{ j }}
+                                </td>
+                                <td>
+                                    <input type="file" name="" id="" accept=”.png”>
+                                </td>
+                                <td>
+                                    <input type="Submit" value="Upload!">
+                                </td>
+                            </tr>
+                </th>
+                {% endfor %}
+            </table>
+            </div>
+</body>
+
+</html>
