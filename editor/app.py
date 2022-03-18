@@ -1,17 +1,21 @@
 from moviepy.editor import VideoFileClip, concatenate_videoclips, ImageClip, TextClip, CompositeVideoClip
 # from moviepy.editor import *
-
+import os
 from parser import *
-from imgSize import imageResize
+# from imgSize import imageResize
 from moviepy.config import change_settings
 
 change_settings(
     {"IMAGEMAGICK_BINARY": r"C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe"}
 )
 
-lists = assetList("amity.yaml")
+# os.chdir("media")
 
+# os.path(r"C:\Users\arnja\Documents\Amity\Sem 6\Major Project\eVe\editor\media")
 
+lists = assetList("amity2.yaml")
+
+os.chdir("media")
 # * --------- Video ------------
 #! videoClip = (VideoFileClip("vid.mp4")
 #!                 .subclip(5000,5010))
@@ -54,7 +58,7 @@ givenParamsImg = {
     }
 # print(imgInfo[1].keys())
 
-imgName = imageResize("logo.png", imgInfo[0]["size"])
+# imgName = imageResize("logo.png", imgInfo[0]["size"])
 
 def imgParams():
     temp = 0

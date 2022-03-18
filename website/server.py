@@ -1,6 +1,7 @@
 from flask import Flask, redirect, render_template, request, url_for
 from submit import strToYAML
 import os
+from editor import edit
 
 app = Flask(__name__)
 
@@ -10,13 +11,15 @@ global uploadsDir
 
 
 def saveFile(yaml, name):
-    file = open(r"static/yaml/" + name + ".yaml", "w")
+    # file = open(r"static/yaml/" + name + ".yaml", "w")
+    file = open(name + ".yaml", "w")
     file.write(yaml)
     file.close()
     return "Success"
 
 def readFile(name):
-    file = open(r"static/yaml/" + name + ".yaml", "r")
+    # file = open(r"static/yaml/" + name + ".yaml", "r")
+    file = open(name + ".yaml", "r")
     trueYAML = file.read()
     file.close()
     return trueYAML
@@ -42,15 +45,18 @@ def assetLoading(name):
         if request.files:
             dictionary = strToYAML(readFile(yamlName))
             dictionary = dictionary["Project"]["assets"]
+
             vid = list(dictionary["video"].keys())
             img = list(dictionary["image"].keys())
+
             vidUpload = request.files["vidAsset"]
             imgUpload = request.files["imgAsset"]
-            UploadDir = "media"
+            uploadsDir = "media"
+
             for vids in vid:
-                vidUpload.save(os.path.join(UploadDir + "\\" + vids))
+                vidUpload.save(os.path.join(uploadsDir + "\\" + vids))
             for imgs in img:
-                imgUpload.save(os.path.join(UploadDir + "\\" + imgs))
+                imgUpload.save(os.path.join(uploadsDir + "\\" + imgs))
             # print(vidUpload, imgUpload)
             return redirect(url_for("render", name = name))
     else:
@@ -62,6 +68,7 @@ def assetLoading(name):
 
 @app.route("/editor/<name>/render")
 def render(name):
+    print(edit(yamlName + ".yaml"))
     return render_template("render.html", name = name)
 
 if __name__ == "__main__":
