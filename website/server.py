@@ -5,10 +5,6 @@ from editor import edit
 
 app = Flask(__name__)
 
-# ! global variables
-global yamlName
-global uploadsDir
-
 
 def saveFile(yaml, name):
     # file = open(r"static/yaml/" + name + ".yaml", "w")
@@ -48,16 +44,23 @@ def assetLoading(name):
 
             vid = list(dictionary["video"].keys())
             img = list(dictionary["image"].keys())
-
-            vidUpload = request.files["vidAsset"]
             imgUpload = request.files["imgAsset"]
             uploadsDir = "media"
 
+            # for hehe in range(len(vid)):
+
+            lmao = 1
+
             for vids in vid:
+                vidUpload = request.files["vidAsset" + str(lmao)]
                 vidUpload.save(os.path.join(uploadsDir + "\\" + vids))
+                lmao += 1
+
             for imgs in img:
                 imgUpload.save(os.path.join(uploadsDir + "\\" + imgs))
             # print(vidUpload, imgUpload)
+            
+
             return redirect(url_for("render", name = name))
     else:
         dictionary = strToYAML(readFile(yamlName))
@@ -68,7 +71,7 @@ def assetLoading(name):
 
 @app.route("/editor/<name>/render")
 def render(name):
-    print(edit(yamlName + ".yaml"))
+    edit(yamlName + ".yaml")
     return render_template("render.html", name = name)
 
 if __name__ == "__main__":

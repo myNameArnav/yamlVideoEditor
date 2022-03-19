@@ -19,13 +19,16 @@
         <table>
             <th colspan="3">
                 <div class="table-title">Videos
-                    <div> {% for i in vid: %}
+                    <div> 
+                        {% for i in vid: %}
                         <tr>
                             <td>
                                 {{ i }}
                             </td>
                             <td>
-                                <input type="file" name="vidAsset" id="" accept=".mp4">
+                                {% set v = loop.index %}
+                                {% set str = "vidAsset" + v|string %}
+                                <input type="file" name={{ str }} id="" accept=".mp4" required>
                             </td>
                         </tr>
             </th>
@@ -42,7 +45,7 @@
                                 {{ j }}
                             </td>
                             <td>
-                                <input type="file" name="imgAsset" id="" accept=”.png”>
+                                <input type="file" name="imgAsset" id="" accept=”.png” required>
                             </td>
                         </tr>
             </th>
