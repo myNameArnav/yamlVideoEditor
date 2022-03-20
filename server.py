@@ -24,6 +24,10 @@ def readFile(name):
 def index():
     return render_template("index.html")
 
+@app.route("/documentation")
+def docs():
+    return render_template("documentation.html")
+
 @app.route("/editor", methods=["GET", "POST"])
 def editor():
     if request.method == "POST":
