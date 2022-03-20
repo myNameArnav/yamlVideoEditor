@@ -5,7 +5,6 @@ def assetList(yamlFile):
     with open(yamlFile) as f:
         dict = yaml.load(f, Loader=yaml.FullLoader)
 
-
         # ? fullYaml = dict
 
         videoInfo = []

@@ -1,14 +1,24 @@
-from moviepy.editor import VideoFileClip, concatenate_videoclips, ImageClip, TextClip, CompositeVideoClip
+from moviepy.editor import (
+    VideoFileClip,
+    concatenate_videoclips,
+    ImageClip,
+    TextClip,
+    CompositeVideoClip,
+)
+
 # from moviepy.editor import *
 from parser import assetList
+
 # from imgSize import imageResize
 from moviepy.config import change_settings
 import os
+
 change_settings(
     {"IMAGEMAGICK_BINARY": r"C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe"}
 )
 
 # os.chdir("static\\yaml")
+
 
 def edit(yamlFile):
     lists = assetList(yamlFile)
@@ -30,7 +40,6 @@ def edit(yamlFile):
         )
     concatClip = concatenate_videoclips(clips)
 
-
     # * --------- Image ------------
     #! logo = (
     #!     ImageClip("logo_small.png")
@@ -44,15 +53,13 @@ def edit(yamlFile):
     imgInfo = lists[1][2]
     givenParams = ["timings", "opacity"]
 
-
-
     givenParamsImg = {
         "timings": [],
         "position": ["center", "center"],
         "opacity": 1,
-        "margin" : [0, 0, 0, 0],
-        "size": 10
-        }
+        "margin": [0, 0, 0, 0],
+        "size": 10,
+    }
     # print(imgInfo[1].keys())
 
     # imgName = imageResize("logo.png", imgInfo[0]["size"])
@@ -69,7 +76,6 @@ def edit(yamlFile):
                     imgInfo[a][i] = j
                     # pass
 
-
     imgParams()
 
     # print(imgInfo[0]["timings"][0])
@@ -82,7 +88,13 @@ def edit(yamlFile):
             .set_start(imgInfo[i]["timings"][0])
             .set_end(imgInfo[i]["timings"][1])
             .set_opacity(float(imgInfo[i]["opacity"]))
-            .margin(top = imgInfo[i]["margin"][0], right = imgInfo[i]["margin"][1], bottom = imgInfo[i]["margin"][2], left = imgInfo[i]["margin"][3], opacity = 0)
+            .margin(
+                top=imgInfo[i]["margin"][0],
+                right=imgInfo[i]["margin"][1],
+                bottom=imgInfo[i]["margin"][2],
+                left=imgInfo[i]["margin"][3],
+                opacity=0,
+            )
         )
         img.append(logo)
 
@@ -104,7 +116,7 @@ def edit(yamlFile):
         "size": 10,
         "font": "Arial",
         "color": "black",
-        "margin": [0, 0, 0, 0]
+        "margin": [0, 0, 0, 0],
     }
     # print(imgInfo[1].keys())
     def txtParams():
@@ -117,7 +129,6 @@ def edit(yamlFile):
                         temp = 1
                 if temp == 0:
                     txtInfo[a][i] = j
-
 
     txtParams()
 
@@ -133,11 +144,18 @@ def edit(yamlFile):
             .set_start(txtInfo[i]["timings"][0])
             .set_end(txtInfo[i]["timings"][1])
             .set_opacity(float(txtInfo[i]["opacity"]))
-            .set_position((str(txtInfo[i]["position"][0]), str(txtInfo[i]["position"][1])))
-            .margin(top = txtInfo[i]["margin"][0], right = txtInfo[i]["margin"][1], bottom = txtInfo[i]["margin"][2], left = txtInfo[i]["margin"][3], opacity = 0)
+            .set_position(
+                (str(txtInfo[i]["position"][0]), str(txtInfo[i]["position"][1]))
+            )
+            .margin(
+                top=txtInfo[i]["margin"][0],
+                right=txtInfo[i]["margin"][1],
+                bottom=txtInfo[i]["margin"][2],
+                left=txtInfo[i]["margin"][3],
+                opacity=0,
+            )
         )
         txt.append(text)
-
 
     # print(txtInfo[0], txtInfo[1])
 
@@ -158,7 +176,6 @@ def edit(yamlFile):
     #     )
     #     aud.append(audio)
 
-
     cvc = [concatClip]
     cvc = cvc + img + txt
     final_clip = CompositeVideoClip(cvc)
@@ -173,3 +190,6 @@ def edit(yamlFile):
         print(final_clip.write_videofile(outputInfo["outputName"], fps=30))
     else:
         print("Try Again")
+
+
+# edit("Amity.yaml")

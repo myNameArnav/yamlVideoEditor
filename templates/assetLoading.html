@@ -27,8 +27,8 @@
                             </td>
                             <td>
                                 {% set v = loop.index %}
-                                {% set str = "vidAsset" + v|string %}
-                                <input type="file" name={{ str }} id="" accept=".mp4" required>
+                                {% set vidStr = "vidAsset" + v|string %}
+                                <input type="file" name={{ vidStr }} id="" accept=".mp4" required>
                             </td>
                         </tr>
             </th>
@@ -45,7 +45,9 @@
                                 {{ j }}
                             </td>
                             <td>
-                                <input type="file" name="imgAsset" id="" accept=”.png” required>
+                                {% set im = loop.index %}
+                                {% set imgStr = "imgAsset" + im|string %}
+                                <input type="file" name={{ imgStr }} id="" accept=”.png” required>
                             </td>
                         </tr>
             </th>
