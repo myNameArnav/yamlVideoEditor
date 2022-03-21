@@ -63,14 +63,14 @@ def assetLoading(name):
 
             for vids in vid:
                 vidUpload = request.files["vidAsset" + str(vidCounter)]
-                vidUpload.save(os.path.join(uploadsDir + "\\" + vids))
+                vidUpload.save(os.path.join(uploadsDir, vids))
                 vidCounter += 1
 
             imgCounter = 1
 
             for imgs in img:
                 imgUpload = request.files["imgAsset" + str(imgCounter)]
-                imgUpload.save(os.path.join(uploadsDir + "\\" + imgs))
+                imgUpload.save(os.path.join(uploadsDir, imgs))
                 imgCounter += 1
             # print(vidUpload, imgUpload)
 
