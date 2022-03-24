@@ -16,6 +16,10 @@ def saveFile(yaml, name):
 
 
 def readFile(name):
+    # print(os.getcwd() + " readFunction1")
+    
+    # os.chdir("/")
+    # print(os.getcwd() + " readFunction2")
     # file = open(r"static/yaml/" + name + ".yaml", "r")
     file = open(name + ".yaml", "r")
     trueYAML = file.read()
@@ -85,9 +89,18 @@ def assetLoading(name):
 
 @app.route("/editor/<name>/render")
 def render(name):
+    cwd = os.getcwd()
+    print(cwd)
     edit(yamlName + ".yaml")
+    os.chdir("../")
+    dictionary = strToYAML(readFile(yamlName))
+    outputName = str(dictionary["Project"]["export"]["outputName"])
+    os.chdir("media")
+    print(cwd)
+    print("----------------------")
+    print(outputName)
     # deleteMedia()
-    return render_template("render.html", name=name)
+    return render_template("render.html", name=name, outputName = outputName)
 
 
 if __name__ == "__main__":
