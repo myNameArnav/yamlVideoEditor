@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, send_file, url_for
 from submit import strToYAML
 import os
 from editor import edit
@@ -17,7 +17,6 @@ def saveFile(yaml, name):
 
 def readFile(name):
     # print(os.getcwd() + " readFunction1")
-    
     # os.chdir("/")
     # print(os.getcwd() + " readFunction2")
     # file = open(r"static/yaml/" + name + ".yaml", "r")
@@ -77,31 +76,35 @@ def assetLoading(name):
                 imgUpload.save(os.path.join(uploadsDir, imgs))
                 imgCounter += 1
             # print(vidUpload, imgUpload)
-
+            name = yamlName
             return redirect(url_for("render", name=name))
     else:
         dictionary = strToYAML(readFile(yamlName))
         dictionary = dictionary["Project"]["assets"]
         vid = list(dictionary["video"].keys())
         img = list(dictionary["image"].keys())
+        name = yamlName
         return render_template("assetLoading.html", vid=vid, img=img, name=name)
 
 
 @app.route("/editor/<name>/render")
 def render(name):
     cwd = os.getcwd()
-    print(cwd)
+    # print(cwd)
     edit(yamlName + ".yaml")
     os.chdir("../")
     dictionary = strToYAML(readFile(yamlName))
+    global outputName
     outputName = str(dictionary["Project"]["export"]["outputName"])
-    os.chdir("media")
-    print(cwd)
-    print("----------------------")
-    print(outputName)
     # deleteMedia()
-    return render_template("render.html", name=name, outputName = outputName)
+    name = yamlName
+    return redirect(url_for("output", name = name))
 
+@app.route("/editor/<name>/output")
+def output(name):
+    name = yamlName
+    file = send_file(os.path.join("media", outputName))
+    return file, name
 
 if __name__ == "__main__":
     app.run(debug=True)
