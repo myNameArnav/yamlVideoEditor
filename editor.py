@@ -190,6 +190,3 @@ def edit(yamlFile):
         print(final_clip.write_videofile(outputInfo["outputName"], fps=30))
     else:
         print("Try Again")
-
-
-# edit("Amity.yaml")
