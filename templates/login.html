@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+
+<body>
+    <h1>Login / <a href={{  url_for('signUp') }}> SignUp</a></h1>
+    <form action="">
+        <label for="email">Username: </label>
+        <input type="text" placeholder="username" class="username">
+        <label for="password">Password: </label>
+        <input type="password" placeholder="*******" class="password">
+        <input type="submit" value="LogIn" class="login">
+    </form>
+</body>
+
+</html>

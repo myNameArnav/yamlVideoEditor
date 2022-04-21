@@ -1,11 +1,5 @@
-*.mp4
-*.mp3
-*.png
-test.yaml
-amity.yaml
-test.py
-test2.py
-text.py
-imgSize.py
-read.py
+*.yaml
+media
+todo.txt
 __pycache__
+db
