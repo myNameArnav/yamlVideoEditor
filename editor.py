@@ -4,6 +4,7 @@ from moviepy.editor import (
     ImageClip,
     TextClip,
     CompositeVideoClip,
+    AudioFileClip,
 )
 
 # from moviepy.editor import *
@@ -161,20 +162,18 @@ def edit(yamlFile):
 
     # * --------- Audio ------------
 
-    # audList = lists[0][1]
-    # audInfo = lists[1][1]
-    # # print(audList, audInfo)
+    audList = lists[0][1]
+    audInfo = lists[1][1]
+    # print(audList, audInfo)
 
-    # aud = []
-    # for i in range(len(audList)):
-    #     audio = (
-    #         AudioFileClip(
-    #             audList[i]
-    #         )
-    #         # .set_start(audInfo[i]["timings"][0])
-    #         # .set_end(audInfo[i]["timings"][1])
-    #     )
-    #     aud.append(audio)
+    aud = []
+    for i in range(len(audList)):
+        audio = (
+            AudioFileClip(audList[i])
+            .set_start(audInfo[i]["timings"][0])
+            .set_end(audInfo[i]["timings"][1])
+        )
+        aud.append(audio)
 
     cvc = [concatClip]
     cvc = cvc + img + txt

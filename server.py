@@ -1,14 +1,22 @@
 from flask import Flask, redirect, render_template, request, send_file, url_for
+from parser import assetList
 from submit import strToYAML
 import os
 from editor import edit
+import pymongo
+
+myClient = pymongo.MongoClient("mongodb://localhost:27017")
+
+myDB = myClient["yamlVideoEditor"]
+
+users = myDB.users
+
 # from deleteFiles import deleteMedia
 
 app = Flask(__name__)
 
 
 def saveFile(yaml, name):
-    # file = open(r"static/yaml/" + name + ".yaml", "w")
     file = open(name + ".yaml", "w")
     file.write(yaml)
     file.close()
@@ -16,10 +24,6 @@ def saveFile(yaml, name):
 
 
 def readFile(name):
-    # print(os.getcwd() + " readFunction1")
-    # os.chdir("/")
-    # print(os.getcwd() + " readFunction2")
-    # file = open(r"static/yaml/" + name + ".yaml", "r")
     file = open(name + ".yaml", "r")
     trueYAML = file.read()
     file.close()
@@ -29,6 +33,42 @@ def readFile(name):
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        x = users.find()
+        for data in x:
+            tempUser = data["username"]
+            if username == tempUser:
+                tempPass = data["password"]
+                if tempPass == password:
+                    return redirect(url_for("editor"))
+                else:
+                    return redirect(url_for("signUp"))
+
+        return redirect(url_for("editor"))
+    else:
+        return render_template("login.html")
+
+
+@app.route("/signUp", methods=["POST", "GET"])
+def signUp():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        print(username, password)
+        cred = {
+            "username": username,
+            "password": password
+        }
+        users.insert_one(cred)
+        return redirect(url_for("login"))
+    else:
+        return render_template("signUp.html")
 
 
 @app.route("/documentation")
@@ -43,6 +83,7 @@ def editor():
         global yamlName
         yamlName = str((yaml.split("\n"))[1])[9:-2]
         saveFile(yaml=yaml, name=yamlName)
+        # fullYAML = (assetList())[3]
         return redirect(url_for("assetLoading", name=yamlName))
     else:
         return render_template("editor.html")
@@ -98,13 +139,15 @@ def render(name):
     outputName = str(dictionary["Project"]["export"]["outputName"])
     # deleteMedia()
     name = yamlName
-    return redirect(url_for("output", name = name))
+    return redirect(url_for("output", name=name))
+
 
 @app.route("/editor/<name>/output")
 def output(name):
     name = yamlName
     file = send_file(os.path.join("media", outputName))
     return file, name
+
 
 if __name__ == "__main__":
     app.run(debug=True)

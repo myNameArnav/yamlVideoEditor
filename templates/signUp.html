@@ -12,11 +12,11 @@
 
 <body>
     <h1><a href={{  url_for('login') }}> Login</a> / SignUp</h1>
-    <form action="">
+    <form action="" method="POST">
         <label for="email">Username: </label>
-        <input type="text" placeholder="username" class="username">
+        <input type="text" placeholder="username" class="username" name="username">
         <label for="password" class="passLabel">Password: </label>
-        <input type="password" placeholder="*******" class="password">
+        <input type="password" placeholder="*******" class="password" name="password">
         <label for="password" class="confirmPassLabel">Confirm Password: </label>
         <input type="password" placeholder="*******" class="confirmPassword">
         <input type="submit" value="signUp" class="signUp">

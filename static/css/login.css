@@ -16,9 +16,9 @@ form {
     grid-template-rows: auto auto auto;
     grid-gap: 1rem;
     /* margin: auto; */
-    background-color: var(--accent-bg);
+    /* background-color: var(--accent-bg); */
     padding: 5rem;
-    border: solid var(--border);
+    /* border: solid var(--border); */
 }
 
 form label {
@@ -39,6 +39,17 @@ form input[type=submit] {
     grid-column: 3/3;
 }
 
+.guestLogin {
+    grid-row: 7;
+    grid-column: 3/3;
+}
+
+.or {
+    grid-row: 6;
+    grid-column: 3;
+    text-align: center;
+}
+
 @media (max-width: 700px) {
     form {
         display: grid;
@@ -46,9 +57,9 @@ form input[type=submit] {
         grid-template-rows: auto auto auto auto auto;
         grid-gap: 1rem;
         /* margin: auto; */
-        background-color: var(--accent-bg);
+        /* background-color: var(--accent-bg); */
         padding: 2rem;
-        border: solid var(--border);
+        /* border: solid var(--border); */
     }
 
     .username {
@@ -69,6 +80,16 @@ form input[type=submit] {
 
     .login {
         grid-row: 5;
+        grid-column: span 4;
+    }
+
+    .guestLogin {
+        grid-row: 7;
+        grid-column: span 4;
+    }
+
+    .or {
+        grid-row: 6;
         grid-column: span 4;
     }
 
