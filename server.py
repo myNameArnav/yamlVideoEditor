@@ -1,10 +1,9 @@
-from flask import Flask, jsonify, redirect, render_template, request, send_file, url_for
+from flask import Flask, redirect, render_template, request, send_file, url_for
 from parser import assetList
 from submit import strToYAML
 import os
 from editor import edit
 import pymongo
-import json
 
 myClient = pymongo.MongoClient("mongodb://localhost:27017")
 
@@ -149,12 +148,12 @@ def output(name):
     file = send_file(os.path.join("media", outputName))
     return file, name
 
-@app.route("/<users>/scripts")
-def profile(users):
-    x = users.find_all()
-    print(x)
-    # for data in x:
-    #     tempUser = data["username"]
+# @app.route("/<users>/scripts")
+# def profile(users):
+
+#     a = users.find()
+#     for data in a:
+        
 
 if __name__ == "__main__":
     app.run(debug=True)
