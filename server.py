@@ -61,11 +61,8 @@ def signUp():
         username = request.form["username"]
         password = request.form["password"]
         print(username, password)
-        cred = {
-            "username": username,
-            "password": password
-        }
-        users.insert_one(cred)
+        newCred = {"username": username, "password": password}
+        users.insert_one(newCred)
         return redirect(url_for("login"))
     else:
         return render_template("signUp.html")
