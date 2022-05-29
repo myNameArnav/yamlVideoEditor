@@ -7,3 +7,6 @@ To run the project
 ```
 python3 server.py
 ```
+### Working
+
+![gif](https://github.com/myNameArnav/yamlVideoEditor/blob/master/assets/wholeProcess.gif)
