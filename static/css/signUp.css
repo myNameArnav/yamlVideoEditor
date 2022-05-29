@@ -16,9 +16,9 @@ form {
     grid-template-rows: auto auto auto;
     grid-gap: 1rem;
     /* margin: auto; */
-    background-color: var(--accent-bg);
+    /* background-color: var(--accent-bg); */
     padding: 5rem;
-    border: solid var(--border);
+    /* border: solid var(--border); */
 }
 
 form label {
@@ -52,9 +52,9 @@ form input[type=submit] {
         grid-template-rows: auto auto auto auto auto auto;
         /* grid-gap: 1rem; */
         /* margin: auto; */
-        background-color: var(--accent-bg);
+        /* background-color: var(--accent-bg); */
         padding: 2rem;
-        border: solid var(--border);
+        /* border: solid var(--border); */
     }
 
     .username {
