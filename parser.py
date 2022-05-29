@@ -52,7 +52,8 @@ def assetList(yamlFile):
     return (
         [videoList, audioList, imageList, textList],
         [videoInfo, audioInfo, imageInfo, textInfo],
-        [output],[fullYaml]
+        [output],
+        [fullYaml],
     )
 
 

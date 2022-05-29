@@ -89,6 +89,7 @@ def editor():
     else:
         return render_template("editor.html")
 
+
 @app.route("/editor/<name>/assetUploading", methods=["GET", "POST"])
 def assetLoading(name):
     if request.method == "POST":
@@ -148,12 +149,13 @@ def output(name):
     file = send_file(os.path.join("media", outputName))
     return file, name
 
+
 # @app.route("/<users>/scripts")
 # def profile(users):
 
 #     a = users.find()
 #     for data in a:
-        
+
 
 if __name__ == "__main__":
     app.run(debug=True)
