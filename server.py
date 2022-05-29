@@ -1,16 +1,17 @@
-from flask import Flask, redirect, render_template, request, send_file, url_for
+from flask import Flask, jsonify, redirect, render_template, request, send_file, url_for
 from parser import assetList
 from submit import strToYAML
 import os
 from editor import edit
 import pymongo
+import json
 
 myClient = pymongo.MongoClient("mongodb://localhost:27017")
 
 myDB = myClient["yamlVideoEditor"]
 
 users = myDB.users
-
+yamlScripts = myDB.yamlScripts
 # from deleteFiles import deleteMedia
 
 app = Flask(__name__)
@@ -37,6 +38,7 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    global loggedIn
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -46,6 +48,7 @@ def login():
             if username == tempUser:
                 tempPass = data["password"]
                 if tempPass == password:
+                    loggedIn = username
                     return redirect(url_for("editor"))
                 else:
                     return redirect(url_for("signUp"))
@@ -80,11 +83,12 @@ def editor():
         global yamlName
         yamlName = str((yaml.split("\n"))[1])[9:-2]
         saveFile(yaml=yaml, name=yamlName)
-        # fullYAML = (assetList())[3]
+        fullDic = dict((assetList(yamlName + ".yaml")[3])[0])
+        fullDic["user"] = loggedIn
+        yamlScripts.insert_one(fullDic)
         return redirect(url_for("assetLoading", name=yamlName))
     else:
         return render_template("editor.html")
-
 
 @app.route("/editor/<name>/assetUploading", methods=["GET", "POST"])
 def assetLoading(name):
@@ -145,6 +149,12 @@ def output(name):
     file = send_file(os.path.join("media", outputName))
     return file, name
 
+@app.route("/<users>/scripts")
+def profile(users):
+    x = users.find_all()
+    print(x)
+    # for data in x:
+    #     tempUser = data["username"]
 
 if __name__ == "__main__":
     app.run(debug=True)
